@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HitChecker", "HitChecker\HitChecker.vcxproj", "{203C7E75-5E79-4890-9846-051863ED12B2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{00EAB97F-1C44-4811-9A7F-299129057729} = {00EAB97F-1C44-4811-9A7F-299129057729}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TH13TrHook", "TH13TrHook\TH13TrHook.vcxproj", "{00EAB97F-1C44-4811-9A7F-299129057729}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{3B09E806-E271-4328-89D2-113974347A79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{203C7E75-5E79-4890-9846-051863ED12B2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{203C7E75-5E79-4890-9846-051863ED12B2}.Debug|Win32.Build.0 = Debug|Win32
+		{203C7E75-5E79-4890-9846-051863ED12B2}.Release|Win32.ActiveCfg = Release|Win32
+		{203C7E75-5E79-4890-9846-051863ED12B2}.Release|Win32.Build.0 = Release|Win32
+		{00EAB97F-1C44-4811-9A7F-299129057729}.Debug|Win32.ActiveCfg = Debug|Win32
+		{00EAB97F-1C44-4811-9A7F-299129057729}.Debug|Win32.Build.0 = Debug|Win32
+		{00EAB97F-1C44-4811-9A7F-299129057729}.Release|Win32.ActiveCfg = Release|Win32
+		{00EAB97F-1C44-4811-9A7F-299129057729}.Release|Win32.Build.0 = Release|Win32
+		{3B09E806-E271-4328-89D2-113974347A79}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3B09E806-E271-4328-89D2-113974347A79}.Debug|Win32.Build.0 = Debug|Win32
+		{3B09E806-E271-4328-89D2-113974347A79}.Release|Win32.ActiveCfg = Release|Win32
+		{3B09E806-E271-4328-89D2-113974347A79}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

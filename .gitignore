@@ -1,0 +1,15 @@
+
+/Debug
+/ipch
+/HitChecker/Debug
+*.sdf
+*.suo
+*.user
+/TH13TrHook/Debug
+/makefile
+*.opensdf
+/HitChecker/Release
+/Release
+/TH13TrHook/Release
+/test/Release
+/test/Debug
