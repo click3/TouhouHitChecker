@@ -128,7 +128,7 @@
 
 #include "org/click3/utility.h"
 #include "org/click3/notification_center.h"
+#include "org/click3/dll_hack_lib.h"
 
-#include "dll_hack_lib.h"
 #include "../common/shared_memory.h"
 #include "main.h"
