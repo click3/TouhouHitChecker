@@ -21,7 +21,7 @@ const TCHAR * const app_name_list[] = {
 const char * const scene_list_json_path_list[] = {
 	"..\\scene_list\\th06.json", "..\\scene_list\\th07.json", "..\\scene_list\\th08.json",
 	"..\\scene_list\\th10.json", "..\\scene_list\\th11.json", "..\\scene_list\\th12.json",
-	"..\\scene_list\\th128.json", "..\\scene_list\\th13tr.json"
+	"..\\scene_list\\th128.json", "..\\scene_list\\th13.json"
 };
 
 const char * const hit_data_list_json_path_list[] = {
@@ -862,7 +862,7 @@ protected:
 		dlg.DoModal(m_hWnd);
 	}
 	void OnTimer(UINT_PTR) {
-		const std::map<const wchar_t *, const wchar_t *> app_list = boost::assign::map_list_of(L"th13.exe", L"TH13TrHook.dll");
+		const std::map<const wchar_t *, const wchar_t *> app_list = boost::assign::map_list_of(L"th13.exe", L"TH13Hook.dll");
 		typedef std::pair<const wchar_t *, const wchar_t *> APP_PAIR;
 		BOOST_FOREACH(const APP_PAIR &pair, app_list) {
 			const bool result = DllInjection(pair.first, pair.second);
