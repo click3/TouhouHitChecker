@@ -418,7 +418,7 @@ protected:
 class HitChecker : boost::noncopyable {
 public:
 	HitChecker(const boost::filesystem::path &hit_data_list_out_path, const boost::filesystem::path &capture_out_dir, const boost::filesystem::path &relative_dir, const TH13Global *th13_global, boost::shared_ptr<IDirect3DDevice9> d3d9_device_ptr, D3DFORMAT format, bool windowed, HWND hwnd) :
-		hit_data_list_out_path(hit_data_list_out_path), th13_global(th13_global), scene_checker(th13_global), capture(capture_out_dir, relative_dir, d3d9_device_ptr, format, windowed, hwnd), prev_mode(0)
+		hit_data_list_out_path(hit_data_list_out_path), th13_global(th13_global), scene_checker(th13_global), capture(capture_out_dir, relative_dir, d3d9_device_ptr, format, windowed, hwnd)
 	{
 		const boost::filesystem::path dir = boost::filesystem::path(hit_data_list_out_path).remove_filename();
 		boost::filesystem::create_directories(dir);
@@ -428,18 +428,18 @@ public:
 		scene_checker.Check();
 		if(th13_global->trans == NULL || th13_global->player == NULL || th13_global->stage == NULL) {
 			surface.reset();
-			prev_mode = 0;
 			return;
 		}
 		boost::function<void (const char *)> callback = boost::bind(&HitChecker::HitInfoSave, this, _1);
-		if(surface) {
-			if(th13_global->player->status == 1) {
-				surface.reset();
-			} else if(th13_global->player->status == 2) {
+		if(surface && th13_global->player->status != 4) {
+			if(	(th13_global->player->status == 2) ||					//通常被弾 
+				(th13_global->player->status == 1 && th13_global->trans->mode == 3)	//被弾時自動トランス
+			) {
 				const bool result = capture.SaveSurface(callback, surface);
 				BOOST_ASSERT(result);
 				surface.reset();
 			}
+			surface.reset();
 		}
 		if(th13_global->player->status_frame_count == 0 && th13_global->player->status == 4) {
 			BOOST_ASSERT(!surface);
@@ -448,18 +448,6 @@ public:
 			boost::mutex::scoped_lock lk(save_data_mtx);
 			const bool create_data_result = scene_checker.CreateSaveData(save_data);
 			BOOST_ASSERT(create_data_result);
-		}
-		if(prev_mode != th13_global->trans->mode) {
-			prev_mode = th13_global->trans->mode;
-			if(prev_mode == 3) {
-				{
-					boost::mutex::scoped_lock lk(save_data_mtx);
-					const bool result = scene_checker.CreateSaveData(save_data);
-					BOOST_ASSERT(result);
-				}
-				const bool result = capture.SaveCurrentScreen(callback);
-				BOOST_ASSERT(result);
-			}
 		}
 	}
 protected:
@@ -470,7 +458,6 @@ protected:
 	mutable boost::mutex save_data_mtx;
 	ScreenCapture capture;
 	boost::shared_ptr<IDirect3DSurface9> surface;
-	unsigned char prev_mode;
 	unsigned char padding[3]; // unused
 	
 	void HitInfoSave(const char *image_filename) {
@@ -554,7 +541,7 @@ void EndScene(void) {
 	const int result = pD3DFont->DrawText(NULL, "DLLハッキングなう！", -1, &r, DT_LEFT | DT_NOCLIP, 0xFFFFFFFF);
 	BOOST_ASSERT(result != 0);
 #else
-	if(th13_global->engine_mode != 1 && th13_global->engine_mode != 4 && th13_global->engine_mode != 5) {
+	if(th13_global->engine_mode != 1 && th13_global->engine_mode != 4) {
 		return;
 	}
 #endif
